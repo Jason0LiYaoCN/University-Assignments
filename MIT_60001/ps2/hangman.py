@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*- 
 # Problem Set 2, hangman.py
 # Name: 
 # Collaborators:
@@ -11,8 +12,8 @@
 # (so be sure to read the docstrings!)
 import random
 import string
-
-WORDLIST_FILENAME = "words.txt"
+import os
+WORDLIST_FILENAME = "D:/Programming/University-Assignments/MIT_60001/ps2/words.txt"
 
 
 def load_words():
@@ -29,7 +30,7 @@ def load_words():
     line = inFile.readline()
     # wordlist: list of strings
     wordlist = line.split()
-    print("  ", len(wordlist), "words loaded.")
+    print(len(wordlist), "words loaded.")
     return wordlist
 
 
@@ -90,13 +91,9 @@ def get_guessed_word(secret_word, letters_guessed):
     final_str = ''.join(final_string)
     return final_str
 
-secret_word = 'apple'
-letters_guessed = ['e', 'i', 'k', 'p', 'r', 's']
-print(get_guessed_word(secret_word, letters_guessed))
-
-
-
-
+# secret_word = 'apple'
+# letters_guessed = ['e', 'i', 'k', 'p', 'r', 's']
+# print(get_guessed_word(secret_word, letters_guessed))
 
 def get_available_letters(letters_guessed):
     '''
@@ -104,11 +101,16 @@ def get_available_letters(letters_guessed):
     returns: string (of letters), comprised of letters that represents which letters have not
       yet been guessed.
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
-    
-    
+    stra2z = "abcdefghijklmnopqrstuvwxyz"
+    stra2z = list(stra2z)
+    for letters in letters_guessed:
+      if letters in stra2z:
+        stra2z.pop(stra2z.index(letters))
+    return ''.join(stra2z)
 
+# letters_guessed = ['e', 'i', 'k', 'p', 'r', 's']
+# print(get_available_letters(letters_guessed))
+    
 def hangman(secret_word):
     '''
     secret_word: string, the secret word to guess.
@@ -135,7 +137,8 @@ def hangman(secret_word):
     Follows the other limitations detailed in the problem write-up.
     '''
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    print("Welcome to the game Hangman!")
+    
 
 
 
