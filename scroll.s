@@ -251,8 +251,8 @@ main_theLength_lt_1:
 	nop	# in delay slot
 main_theLength_ge_1:
 
-#******************************************* ... TODO LAST ... *******************************************
-#****************************************************************************************************
+	# ... TODO ...
+
 	# return 0
 	move	$v0, $zero
 main__post:
@@ -295,8 +295,8 @@ setUpDisplay:
 	sw	$ra, -4($fp)
 	la	$sp, -8($fp)
 
-#******************************************* ... TODO ... *******************************************
-##***************************************************************************************************
+	# ... TODO ...
+
 	# tear down stack frame
 	lw	$ra, -4($fp)
 	la	$sp, 4($fp)
@@ -325,55 +325,20 @@ showDisplay:
 #	-> [epilogue]
 
 # Code:
-#******************************************* ... TODO ... *******************************************
-	#FIX THE STACK FRAME SETUP AND TEARDOWN
 	# set up stack frame
 	sw	$fp, -4($sp)
 	la	$fp, -4($sp)
 	sw	$ra, -4($fp)
-	sw 	$s0, -8($fp) # s0 = i
-	sw 	$s1, -12($fp) #s1 = j
-	sw 	$s2, -16($fp)
-	la	$sp, -20($fp)
+	la	$sp, -8($fp)
 
-	#printf(CLEAR)
-	la 	$t0, CLEAR
-	li 	$v0, 4
-	syscall 			# printf(CLEAR)
-
-	lw 	$t0, NROWS 		# t0 = NROWS
-	lw 	$t1, NCOLS 		# t1 = NCOLS
-
-	li 	$s0, 0 			# i = 0
-	
-
-	bge 	$s0, $t0, endOuterFor 	# while(i < NROWS) {
-	li 	$s1, 0			# j = 0
-	bge 	$s1, $t1, endInnerFor 	# 	while (j < NDCOLS) {
-
-	li    $t2, 4               # t2 = 4 (for sizeof(int))
-	mul   $t3, $s0, $s1        # offset = row counter * size of row
-	add   $t0, $t0, $s4        # offset = offset + column counter      
-	mul   $t0, $t0, $t1        # offset = offset * 4
-	add   $t2, $t0, $s0       # changing t2 to be the value we want
-
-
-	addi 	$s1, $s1, 1		# 	j = j + 1
-endInnerFor:				# 	}
-	addi 	$s0, $s0, 1 		# i = i + 1
-endOuterFor:				# }
-
+	# ... TODO ...
 
 	# tear down stack frame
-	lw 	$s2, ($sp)
-	lw 	$s1, ($sp)
-	lw 	$s0, ($sp)
 	lw	$ra, -4($fp)
 	la	$sp, 4($fp)
 	lw	$fp, ($fp)
 	jr	$ra
 	nop	# in delay slot
-##***************************************************************************************************
 
 ########################################################################
 # .TEXT <delay>
@@ -496,37 +461,6 @@ isUpper:
 # Code:
 	# set up stack frame
 	# ... TODO ...
-	sw	$fp, -4($sp)
-	la	$fp, -4($sp)
-	sw	$ra, -4($fp)
-	la	$sp, -8($fp)
-
-	# if (ch >= 'A')
-	li	$v0, 'A'
-	blt	$a0, $v0, isUpper_ch_lt_a
-	nop	# in delay slot
-isUpper_ch_ge_a:
-	# if (ch <= 'Z')
-	li	$v0, 'Z'
-	bgt	$a0, $v0, isUpper_ch_gt_z
-	nop	# in delay slot
-isUpper_ch_le_z:
-	addi	$v0, $zero, 1
-	j	isUpper_ch_phi
-	nop	# in delay slot
-
-	# ... else
-isUpper_ch_lt_a:
-isUpper_ch_gt_z:
-	move	$v0, $zero
-	# fallthrough
-isUpper_ch_phi:
-
-isUpper__post:
-	# tear down stack frame
-	lw	$ra, -4($fp)
-	la	$sp, 4($fp)
-	lw	$fp, ($fp)
 	# tear down stack frame
 	jr	$ra
 	nop	# in delay slot
